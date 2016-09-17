@@ -27,6 +27,14 @@ export default class PageForm extends React.Component{
       this._fireSend = this._fireSend.bind(this);
    }
 
+   componentWillReceiveProps(nextProps){
+      this.setState({
+         title: nextProps.title || this.state.title,
+         subtitle: nextProps.subtitle || this.state.subtitle,
+         text: nextProps.text || this.state.text,
+      })
+   }
+
    updateText(event) {
       var nText = event.target.value;
       this.setState(function () {
@@ -75,15 +83,18 @@ export default class PageForm extends React.Component{
    }
 
    render(){
+      let title = this.state.title
+      let subtitle = this.state.subtitle
+      let text = this.state.text
       return (
          <form>
             <Paper zDepth={1}>
                <CardText>
                   <h1>Create new page</h1>
                   <div>
-                     <TextField hintText="Page title" onChange={this.updateTitle} />
+                     <TextField hintText="Page title" onChange={this.updateTitle} value={title} />
                   </div><div>
-                     <TextField hintText="Page subtitle" onChange={this.updateSubtitle} />
+                     <TextField hintText="Page subtitle" onChange={this.updateSubtitle} value={subtitle} />
                   </div>
                </CardText>
             </Paper>
@@ -95,6 +106,7 @@ export default class PageForm extends React.Component{
                underlineShow={false}
                style={textAreaStyle}
                onChange={this.updateText}
+               value={text}
             />
             </Paper>
             <Paper zDepth={1}>

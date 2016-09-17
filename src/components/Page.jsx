@@ -17,6 +17,8 @@ export default class Page extends React.Component{
             <CardText>
                <MathDisplay data={text} />
             </CardText>
+
+            {this.props.children}
          </Card>
       )
    }

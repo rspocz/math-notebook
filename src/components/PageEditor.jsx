@@ -28,13 +28,20 @@ export default class PageEditor extends React.Component {
    }
 
    componentDidMount() {
-      if(this.props.params.notebookId){
+      if(this.props.params.notebookId && this.props.params.pageId){
+         this.setState({
+            notebookId: this.props.params.notebookId,
+            pageId: this.props.params.pageId
+         }, () => {
+            storage.getPage(this.props.params.pageId).then(function (page){
+                  this.setState({
+                        page: page
+                  })
+            }.bind(this))
+         })
+      }else if(this.props.params.notebookId){
          this.setState({
             notebookId: this.props.params.notebookId
-         })
-      }else if(this.props.params.pageId){
-         this.setState({
-            pageId: this.props.params.pageId
          })
       }else{
          console.log("Error - PageEditor with no page to edit")
@@ -45,7 +52,9 @@ export default class PageEditor extends React.Component {
       console.log(page)
       if(this.state.pageId){
          page = Object.assign({}, page, {_id: this.state.pageId})
-         storage.updatePage(this.state.pageId, {$set: page})
+         storage.updatePage(this.state.pageId, {$set: page}).then(function (){
+            this.context.router.push("notebook/"+this.state.notebookId)
+         }.bind(this))
       } else{
          storage.savePage(page).then( function (page){
             return storage.updateNotebook(
@@ -75,7 +84,7 @@ export default class PageEditor extends React.Component {
 
       return (
          <div>
-            <PageForm onSend={this.formSend} onChange={this.formChanged}/>
+            <PageForm onSend={this.formSend} onChange={this.formChanged} title={title} subtitle={subtitle} text={text} />
             <p></p>
             <Page title={title} subtitle={subtitle} text={text} />
          </div>

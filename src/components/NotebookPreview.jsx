@@ -1,6 +1,6 @@
 import React from 'react'
 import Paper from 'material-ui/Paper';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
 import { Link } from 'react-router'
 
 export default class NotebookPreview extends React.Component{
@@ -18,8 +18,9 @@ export default class NotebookPreview extends React.Component{
             <CardTitle title={name} />
 
             <CardText>
-               <Link to={"/notebook/"+id}>Show notebook </Link>
             </CardText>
+
+            {this.props.children}
          </Paper>
       )
    }

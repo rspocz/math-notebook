@@ -1,10 +1,9 @@
 import '../assets/stylesheets/base.scss';
 import React, { Component } from 'react';
-import MathInputTest from './MathInputTest'
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import IconButton from 'material-ui/IconButton';
 
@@ -33,37 +32,40 @@ export default class App extends React.Component{
    }
 
    render() {
-    return(
-      <MuiThemeProvider>
-         <div>
-         <AppBar
-            title="MWriter"
-            iconElementRight={<IconButton><NavigationClose /></IconButton>}
-            onLeftIconButtonTouchTap={this.handleShow}
-         />
+      console.log(this.props.children)
+      let title =  "Math Notebook"
 
-         <Drawer
-             docked={false}
-             width={200}
-             open={this.state.menuOpen}
-             onRequestChange={this.menuRequestChange}
-         >
-            <MenuItem
-               containerElement={<Link to="/" />}
-               onTouchTap={this.handleClose}>
-               Root
-            </MenuItem>
-            <MenuItem
-               containerElement={<Link to="/show-notebooks" />}
-               onTouchTap={this.handleClose}>
-               Show Notebooks
-            </MenuItem>
-         </Drawer>
+      return(
+         <MuiThemeProvider>
+            <div>
+               <AppBar
+                  title={title}
+                  iconElementRight={<IconButton><NavigationClose /></IconButton>}
+                  onLeftIconButtonTouchTap={this.handleShow}
+               />
 
-         {this.props.children}
+               <Drawer
+                  docked={false}
+                  width={200}
+                  open={this.state.menuOpen}
+                  onRequestChange={this.menuRequestChange}
+               >
+                  <MenuItem
+                     containerElement={<Link to="/" />}
+                     onTouchTap={this.handleClose}>
+                     Root
+                  </MenuItem>
+                  <MenuItem
+                     containerElement={<Link to="/show-notebooks" />}
+                     onTouchTap={this.handleClose}>
+                     Show Notebooks
+                  </MenuItem>
+               </Drawer>
 
-         </div>
-      </MuiThemeProvider>
-    )
-  }
+               {this.props.children}
+
+            </div>
+         </MuiThemeProvider>
+       )
+     }
 };

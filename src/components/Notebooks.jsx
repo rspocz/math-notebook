@@ -1,8 +1,9 @@
 import React from 'react'
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import {CardActions} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import NotebookPreview from "./NotebookPreview"
 import { Link } from 'react-router'
+import FlatButton from 'material-ui/FlatButton';
 
 import NeDBStorage from "../model/NeDBStorage"
 
@@ -34,7 +35,25 @@ export default class Notebooks extends React.Component{
 
       for(var ntb of this.state.notebooks){
          notebooks.push(
-            <NotebookPreview notebook={ntb} key={ntb._id} />
+            <NotebookPreview notebook={ntb} key={ntb._id}>
+               <CardActions>
+                  <FlatButton
+                     containerElement={<Link to={"/notebook/" + ntb._id} />}
+                     label="Show notebook" />
+
+                  <FlatButton
+                     containerElement={<Link to={"/notebook/" + ntb._id} />}
+                     label="Edit notebook" />
+
+                  <FlatButton
+                     containerElement={<Link to={"/notebook/" + ntb._id} />}
+                     label="Export notebook" />
+
+                  <FlatButton
+                     containerElement={<Link to={"/notebook/" + ntb._id} />}
+                     label="Remove notebook" />
+               </CardActions>
+            </NotebookPreview>
          )
       }
 
