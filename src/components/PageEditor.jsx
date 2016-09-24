@@ -1,18 +1,10 @@
 import Page from "./Page.jsx"
 import React  from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
 import PageForm from './PageForm'
 
 import NeDBStorage from "../model/NeDBStorage"
 
 let storage = new NeDBStorage
-
-const textAreaStyle = {
-  paddingLeft: 20,
-  paddingRight: 20,
-  width: "calc(100% - 40px)"
-};
 
 export default class PageEditor extends React.Component {
    constructor(props) {
@@ -44,12 +36,11 @@ export default class PageEditor extends React.Component {
             notebookId: this.props.params.notebookId
          })
       }else{
-         console.log("Error - PageEditor with no page to edit")
+         console.error("Error - PageEditor with no page to edit")
       }
    }
 
    formSend(page){
-      console.log(page)
       if(this.state.pageId){
          page = Object.assign({}, page, {_id: this.state.pageId})
          storage.updatePage(this.state.pageId, {$set: page}).then(function (){

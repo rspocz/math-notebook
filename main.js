@@ -36,12 +36,12 @@ function printToPdf(){
        if (error) throw error
        fs.writeFile('./print.pdf', data, function(error){
          if (error) throw error
-         console.log('Write PDF successfully.')
+         //console.log('Write PDF successfully.')
        })
     })
 }
 
-ipcMain.on('printToPdf', (event, arg) => {
+ipcMain.on('printToPdf', () => {
   printToPdf()
 })
 // This method will be called when Electron has finished

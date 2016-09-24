@@ -1,4 +1,3 @@
-import MathDisplay from "./MathDisplay.jsx"
 import React  from 'react';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';

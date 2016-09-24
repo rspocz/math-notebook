@@ -1,7 +1,4 @@
 import React from 'react'
-import {CardActions} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import NotebookPreview from "./NotebookPreview"
 import { Link } from 'react-router'
 import FlatButton from 'material-ui/FlatButton';
 
@@ -60,6 +57,8 @@ export default class Notebooks extends React.Component{
       return (
          <div>
             {notebooks}
+
+            <Link to="/notebook/new">Add notebook</Link>
          </div>
       )
    }

@@ -16,9 +16,7 @@ export default class Notebook extends React.Component{
    }
 
    componentDidMount() {
-      console.log(this.props.params.notebookId)
       storage.getNotebook(this.props.params.notebookId).then(function (notebook){
-         console.log(notebook)
          this.setState({
             notebook: notebook,
             title: notebook.name
@@ -55,7 +53,24 @@ export default class Notebook extends React.Component{
       let name = this.state.notebook.name
       let id = this.state.notebook._id
 
-      for(var page of this.state.notebook.pages || []){
+
+
+      for(let [i, page] of (this.state.notebook.pages || []).entries()){
+         let moveUpButton, moveDownButton
+         if(i == 0) {
+            moveUpButton = null
+         } else {
+            moveUpButton = <FlatButton
+               containerElement={<a />}
+               label="Move up" />
+         }
+         if(i == this.state.notebook.pages.length -1){
+            moveDownButton = null
+         }else{
+            moveDownButton = <FlatButton
+               containerElement={<a />}
+               label="Move Down" />
+         }
          pages.push(
             <Page key={page._id} title={page.title} subtitle={page.subtitle} text={page.text}>
                <FlatButton
@@ -67,6 +82,8 @@ export default class Notebook extends React.Component{
                   confirmLabel="Do you really want to remove this notebook?"
                   secondary={true}
                   onTouchTap={this.removePageHandler(page._id)}/>
+               {moveUpButton}
+               {moveDownButton}
             </Page>
          )
       }

@@ -1,6 +1,4 @@
-import Page from "./Page.jsx"
 import React  from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';

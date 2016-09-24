@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, hashHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 import App from "./App"
 import PageEditor from "./PageEditor"
 import NotebookEditor from "./NotebookEditor"

@@ -1,5 +1,5 @@
 import '../assets/stylesheets/base.scss';
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
@@ -32,7 +32,6 @@ export default class App extends React.Component{
    }
 
    render() {
-      console.log(this.props.children)
       let title =  "Math Notebook"
 
       return(
@@ -68,4 +67,4 @@ export default class App extends React.Component{
          </MuiThemeProvider>
        )
      }
-};
+}

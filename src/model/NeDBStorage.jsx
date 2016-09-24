@@ -1,9 +1,7 @@
-const app = window.require('electron').remote.app;
-const fs = window.require('electron').remote.fs;
 const Datastore  = window.require('electron').remote.require('nedb')
 
 const DB_PATH = window.require('electron').remote.app.getPath("appData") + "/math-notebook/data" // "D:\\MWriter"
-console.log("DB_PATH", DB_PATH)
+//console.log("DB_PATH", DB_PATH)
 
 let notebooks = new Datastore({ filename: DB_PATH + "/notebooks.json", autoload: true })
 /**
@@ -33,7 +31,6 @@ export default class NeDBStorage{
    getNotebook(id){
       return new Promise( (resolve, reject) => {
          notebooks.findOne({_id: id}, function (err, ntb) {
-            console.log(ntb)
             if(err){
                reject(err)
             } else {
@@ -73,6 +70,8 @@ export default class NeDBStorage{
             return new Promise( (resolve, reject) => {
                   this.savePage(page).then( (page) => {
                      resolve(page._id)
+                  }).catch( (reason) => {
+                     reject(reason)
                   })
             })
          }
