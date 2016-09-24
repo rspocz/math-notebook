@@ -2,7 +2,8 @@ const app = window.require('electron').remote.app;
 const fs = window.require('electron').remote.fs;
 const Datastore  = window.require('electron').remote.require('nedb')
 
-const DB_PATH = "D:\\MWriter"
+const DB_PATH = window.require('electron').remote.app.getPath("appData") + "/math-notebook/data" // "D:\\MWriter"
+console.log("DB_PATH", DB_PATH)
 
 let notebooks = new Datastore({ filename: DB_PATH + "/notebooks.json", autoload: true })
 /**
@@ -37,16 +38,29 @@ export default class NeDBStorage{
                reject(err)
             } else {
                Promise.all( ntb.pages.map( function(pageId){
-                     console.log(pageId)
                      return this.getPage(pageId)
                   }.bind(this))
                ).then( function (pages){
-                  console.log(pages)
-                  ntb.pages = pages
+                  ntb.pages = pages.filter( (page) => {
+                     return page
+                  })
                   resolve(ntb)
                })
             }
          }.bind(this))
+      })
+   }
+
+   //@TODO: remove all pages in ntb
+   removeNotebook(id){
+      return new Promise( (resolve, reject) => {
+         notebooks.remove({_id: id}, {}, function (err, numRemoved) {
+            if(err){
+               reject(err)
+            } else {
+               resolve(numRemoved)
+            }
+         });
       })
    }
 
@@ -122,6 +136,18 @@ export default class NeDBStorage{
                resolve(newDoc)
             }
          })
+      })
+   }
+
+   removePage(id){
+      return new Promise( (resolve, reject) => {
+         pages.remove({_id: id}, {}, function (err, numRemoved) {
+            if(err){
+               reject(err)
+            } else {
+               resolve(numRemoved)
+            }
+         });
       })
    }
 }

@@ -4,6 +4,7 @@ import Page from "./Page.jsx"
 import NeDBStorage from "../model/NeDBStorage"
 import { Link } from 'react-router'
 import FlatButton from 'material-ui/FlatButton';
+import ConfirmButton from './ConfirmButton'
 
 let storage = new NeDBStorage
 
@@ -36,6 +37,11 @@ export default class Notebook extends React.Component{
             return page._id !== id
          } )
 
+         storage.updateNotebook(this.state.notebook._id, {
+            $pull:{ pages: id }
+         })
+         storage.removePage(id)
+
          this.setState({
             notebook: ntb
          })
@@ -55,9 +61,10 @@ export default class Notebook extends React.Component{
                <FlatButton
                   containerElement={<Link to={"/notebook/" + id + "/" + page._id + "/edit"} />}
                   label="Edit page" />
-               <FlatButton
+               <ConfirmButton
                   containerElement={<a />}
                   label="Remove page"
+                  confirmLabel="Do you really want to remove this notebook?"
                   secondary={true}
                   onTouchTap={this.removePageHandler(page._id)}/>
             </Page>
@@ -68,10 +75,6 @@ export default class Notebook extends React.Component{
             {pages}
 
             <Link to={"/notebook/"+id+"/new-page"}>Add page</Link>
-
-            <Dialog ref="dialog" title="" actions="">
-               dialog content
-            </Dialog>
          </div>
       )
    }
