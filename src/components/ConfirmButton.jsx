@@ -13,7 +13,8 @@ export default class ConfirmButton extends React.Component{
       this.clicked = this.clicked.bind(this)
    }
 
-   clicked(event){
+   clicked(){
+      clearTimeout(this.timer)
       if(this.state.clicked === false){
          this.setState({
             clicked: true
@@ -22,7 +23,7 @@ export default class ConfirmButton extends React.Component{
             this.setState({
                clicked: false
             })
-         }.bind(this), 8000)
+         }.bind(this), 5000)
       } else{
          this.props.onTouchTap(this)
       }

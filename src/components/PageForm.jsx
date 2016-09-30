@@ -97,15 +97,15 @@ export default class PageForm extends React.Component{
                </CardText>
             </Paper>
             <Paper zDepth={1}>
-            <TextField
-               hintText="Page Content"
-               multiLine={true}
-               rowsMax={10}
-               underlineShow={false}
-               style={textAreaStyle}
-               onChange={this.updateText}
-               value={text}
-            />
+               <TextField
+                  hintText="Page Content"
+                  multiLine={true}
+                  rowsMax={10}
+                  underlineShow={false}
+                  style={textAreaStyle}
+                  onChange={this.updateText}
+                  value={text}
+               />
             </Paper>
             <Paper zDepth={1}>
                <CardText>

@@ -1,5 +1,4 @@
 import React from 'react'
-import {CardActions} from 'material-ui/Card';
 import Page from "./Page.jsx"
 import NeDBStorage from "../model/NeDBStorage"
 import { Link } from 'react-router'
@@ -29,7 +28,7 @@ export default class Notebook extends React.Component{
    }
 
    removePageHandler(id){
-      return function(event){
+      return function(){
          let ntb = this.state.notebook
          ntb.pages = ntb.pages.filter( (page) => {
             return page._id !== id
@@ -50,7 +49,6 @@ export default class Notebook extends React.Component{
 
    render(){
       let pages = []
-      let name = this.state.notebook.name
       let id = this.state.notebook._id
 
 
@@ -79,7 +77,7 @@ export default class Notebook extends React.Component{
                <ConfirmButton
                   containerElement={<a />}
                   label="Remove page"
-                  confirmLabel="Do you really want to remove this notebook?"
+                  confirmLabel="Click to remove this page"
                   secondary={true}
                   onTouchTap={this.removePageHandler(page._id)}/>
                {moveUpButton}

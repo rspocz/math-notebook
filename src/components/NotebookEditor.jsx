@@ -1,6 +1,5 @@
 import React  from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
+import {Card, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import NeDBStorage from '../model/NeDBStorage'
@@ -21,14 +20,13 @@ export default class NotebookEditor extends React.Component {
      });
   }
 
-  send(event){
+  send(){
      this.model.saveNotebook({name: this.state.name, pages: []}).then(function (){
         this.context.router.push("show-notebooks")
      }.bind(this))
  }
 
   render() {
-    var text = this.state.text;
     return (
       <div>
          <Card>

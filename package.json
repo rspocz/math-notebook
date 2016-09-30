@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron main.js",
     "dev": "node server.js",
-    "postinstall": "webpack -p --config webpack.config.js"
+    "build-js": "webpack -p --config webpack.config.js",
+    "build": "electron-packager . --platform=win32 --out=./out/"
   },
   "dependencies": {
     "nedb": "*"
@@ -19,6 +20,7 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.24.0",
     "electron": "^1.4.0",
+    "electron-packager": "^8.0.0",
     "eslint": "*",
     "eslint-plugin-react": "^6.3.0",
     "express": "^4.13.4",
